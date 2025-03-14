@@ -7,6 +7,8 @@ import org.apache.commons.io.FileUtils;
 import org. openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import io.cucumber.java.After;
 import io.cucumber.java.AfterStep; 
 import io.cucumber.java.Before;
@@ -34,19 +36,16 @@ driver.quit();
 @AfterStep
 public void AddScreenshot (Scenario scenario) throws IOException {
 	 System.out.println("After step hook"); 
-//if (scenario. isFailed ()) {
-// screenshot
-File sourcePath = ((TakesScreenshot) driver).getScreenshotAs (OutputType.FILE) ;
+	 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20)); 
+	  WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+ 
+    File sourcePath = ((TakesScreenshot) driver).getScreenshotAs (OutputType.FILE) ;
 
-//File destinationPath = new File("./src/test/resources/"+scenario + ".png");
 
-//Copy taken screenshot from source location to destination location
-//Files.copy(sourcePath, destinationPath);
-//FileUtils.copyFile(sourcePath, destinationPath);
 System.out.println("source path" +sourcePath); 
 //byte[] fileContent = FileUtils. readFileToByteArray(destinationPath) ;
 byte[] fileContent = FileUtils. readFileToByteArray(sourcePath) ;
-scenario.attach (fileContent, "image/png", "image");
+scenario.attach (fileContent, "image/png", "screenshot");
 
 //byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 //scenario.attach(screenshot, "image/png", "image");

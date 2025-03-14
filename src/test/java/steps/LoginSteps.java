@@ -1,8 +1,13 @@
 package steps; 
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,44 +21,36 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When; 
 import Pages.LoginPage;
+import utilities.Configuration;
+import utilities.Driver;
+import utilities.BrowserUtils;
+
 
 public class LoginSteps { 
-   WebDriver driver = null; 
+   WebDriver driver = Driver.getDriver(); 
    LoginPage login = new LoginPage();
 	
 
   
-       @Given("I open the USDA homepage")
+       @Given("I open the TSCTI homepage")
        public void openUSDAHomepage() {
-           // Set the correct path to ChromeDriver
-    	   System.setProperty("webdriver.chrome.driver", "C:\\SoftwareDistribution\\chromedriver.exe"); // Replace with your path to ChromeDriver
-
-           // Initialize WebDriver for Chrome
-           ChromeOptions options = new ChromeOptions();
-           options.addArguments("--start-maximized"); // Start browser maximized
-           driver = new ChromeDriver(options);
-
-           // Navigate to USDA homepage
-           driver.get("https://www.usda.gov");
+          
+           driver.get(Configuration.getProperty("tsctiurl"));
        }
 
-       @Then("I should see the U.S. Department of Agriculture text")
-       public void verifyUSDAVisibleText() {
-           // Wait for the element containing "U.S. Department of Agriculture" to be visible
-           WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-           
-           // Find the element containing the text "U.S. Department of Agriculture"
-          // login.homeButton.click();
-           WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(), 'U.S. Department of Agriculture')]")));
+       @Then("I should see the Our Services text")
+       public void verifyUSDAVisibleText() throws IOException {
+          
+           WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));          
+           WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Our Services']")));
          
            // Verify that the element is displayed
            if (element != null && element.isDisplayed()) {
-               System.out.println("The text 'U.S. Department of Agriculture' is visible on the page.");
+               System.out.println("The text 'Our Services' is visible on the page.");
            } else {
-               System.out.println("The text 'U.S. Department of Agriculture' is NOT visible on the page.");
+               System.out.println("The text 'Our Services' is NOT visible on the page.");
            }
-
-           // Close the browser after the test
-           driver.quit();
+           
+           
        }
 }
