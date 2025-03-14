@@ -6,6 +6,7 @@ import java.time.Duration;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -20,15 +21,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When; 
-import Pages.LoginPage;
+import Pages.HomePage;
 import utilities.Configuration;
 import utilities.Driver;
 import utilities.BrowserUtils;
 
 
-public class LoginSteps { 
+public class HomeSteps { 
    WebDriver driver = Driver.getDriver(); 
-   LoginPage login = new LoginPage();
+   HomePage home = new HomePage();
 	
 
   
@@ -41,7 +42,12 @@ public class LoginSteps {
        @Then("I should see the Our Services text")
        public void verifyUSDAVisibleText() throws IOException {
           
-           WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));          
+    	   //WebElement element = driver.findElement(By.xpath("//h2[contains(text(),'Specific Text')]"));
+
+    	// Scroll to the element
+    	JavascriptExecutor js = (JavascriptExecutor) driver;
+    	js.executeScript("arguments[0].scrollIntoView(true);", home.ourServices);
+    	   WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1000));          
            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Our Services']")));
          
            // Verify that the element is displayed

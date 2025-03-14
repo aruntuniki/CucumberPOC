@@ -7,16 +7,16 @@ import org.openqa.selenium.support.PageFactory;
 
 import utilities.Driver;
 
-public class LoginPage {
+public class HomePage {
 	
-	public LoginPage()
+	public HomePage()
 	{
 		WebDriver driver = Driver.getDriver();
 		PageFactory.initElements(driver, this);
 	}
 	
-	@FindBy(xpath = "//a[contains(@href, 'home')]")
-	public WebElement homeButton;
+	@FindBy(xpath = "//span[text()='Our Services']")
+	public WebElement ourServices;
 	
 
 }
