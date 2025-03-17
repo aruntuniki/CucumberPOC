@@ -34,13 +34,13 @@ public class HomeSteps {
 
   
        @Given("I open the TSCTI homepage")
-       public void openUSDAHomepage() {
-          
-           driver.get(Configuration.getProperty("tsctiurl"));
+       public void openTSCTIHomepage() {
+    	   driver.get(Configuration.getBaseUrl());
+        //   driver.get(Configuration.getProperty("tsctiurl"));
        }
 
        @Then("I should see the Our Services text")
-       public void verifyUSDAVisibleText() throws IOException {
+       public void verifyTSCTIVisibleText() throws IOException {
           
     	   //WebElement element = driver.findElement(By.xpath("//h2[contains(text(),'Specific Text')]"));
 

@@ -34,11 +34,11 @@ public class Configuration {
 	}
 	
 	public static String getBaseUrl () {
-	String env = System. getProperty ("env") ;
-	if (env!=null && env.equalsIgnoreCase ("sdte") )
-	return getProperty("selfAssessmentURLSDTE") ;
+	String env = System.getProperty("env");
+	if (env!=null && env.equalsIgnoreCase ("company") )
+	return getProperty("tsctiurl") ;
 	else
-	return getProperty("selfAssessmentURLDevOA") ;
+	return getProperty("Googleurl") ;
 	}
 
 }
