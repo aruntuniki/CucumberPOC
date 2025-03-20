@@ -36,9 +36,9 @@ public class Configuration {
 	public static String getBaseUrl () {
 	String env = System.getProperty("env");
 	if (env!=null && env.equalsIgnoreCase ("company") )
-	return getProperty("tsctiurl") ;
+	return getProperty("googleurl") ;
 	else
-	return getProperty("Googleurl") ;
+	return getProperty("tsctiurl") ;
 	}
 
 }

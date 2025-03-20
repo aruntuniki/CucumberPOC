@@ -18,7 +18,7 @@ public class Driver {
 	if (driver == null || ( (RemoteWebDriver) driver).getSessionId() == null) { // driver==null
 	if (browser. equals ("chrome")) {
 	ChromeOptions options = new ChromeOptions () ;
-	options .addArguments ("--headless");
+	//options .addArguments ("--headless");
 	options. addArguments ("--disable-extensions"); 
 	options .addArguments ("--whitelisted-ips=''") ; 
 	options .addArguments ("--start-maximized");
